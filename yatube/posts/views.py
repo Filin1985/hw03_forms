@@ -1,6 +1,5 @@
 from django.http import Http404
 from django.shortcuts import get_object_or_404, redirect, render
-from django.contrib.auth.decorators import login_required  # pyflakes.ignore
 from django.core.paginator import Paginator
 
 from .forms import PostForm
