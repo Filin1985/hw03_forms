@@ -45,7 +45,7 @@ def profile(request, username):
     posts_list = (
         Post.objects.select_related('author')
         .filter(author__username=username)
-    )    
+    )
     page_obj = paginate_posts(request, posts_list)
     context = {
         'page_obj': page_obj,
@@ -67,6 +67,7 @@ def post_detail(request, post_id):
     }
     return render(request, 'posts/post_detail.html', context)
 
+
 @login_required(login_url='login')
 def post_create(request):
     """Создание нового поста"""
@@ -77,7 +78,7 @@ def post_create(request):
     new_post.author = request.user
     new_post.save()
     return redirect('posts:profile', request.user.username)
-   
+
 
 @login_required(login_url='login')
 def post_edit(request, post_id):
@@ -93,7 +94,7 @@ def post_edit(request, post_id):
     form = PostForm(request.POST or None, instance=post)
     if not form.is_valid():
         context = {
-            'form': form, 
+            'form': form,
             'is_edit': is_edit
         }
         return render(request, 'posts/create_post.html', context)
