@@ -1,6 +1,5 @@
 from django.contrib.auth.decorators import login_required
 from django.core.paginator import Paginator
-from django.http import Http404
 from django.shortcuts import get_object_or_404, redirect, render
 
 from .forms import PostForm
@@ -15,8 +14,8 @@ def paginate_posts(request, posts):
 def index(request):
     """Отображение всех последних 10 постов"""
     return render(
-        request, 
-        'posts/index.html', 
+        request,
+        'posts/index.html',
         {'page_obj': paginate_posts(request, Post.objects.all())}
     )
 
@@ -47,6 +46,7 @@ def post_detail(request, post_id):
     }
     return render(request, 'posts/post_detail.html', context)
 
+
 @login_required
 def post_create(request):
     """Создание нового поста"""
@@ -57,7 +57,7 @@ def post_create(request):
     post.author = request.user
     post.save()
     return redirect('posts:profile', request.user.username)
-   
+
 
 @login_required
 def post_edit(request, post_id):
@@ -69,7 +69,7 @@ def post_edit(request, post_id):
     form = PostForm(request.POST or None, instance=post)
     if not form.is_valid():
         context = {
-            'form': form, 
+            'form': form,
             'is_edit': is_edit
         }
         return render(request, 'posts/create_post.html', context)
