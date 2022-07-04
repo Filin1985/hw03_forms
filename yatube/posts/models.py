@@ -23,7 +23,7 @@ class Post(models.Model):
     """Модель поста"""
     text = models.TextField('Текст')
     pub_date = models.DateTimeField(
-        auto_now_add=True, 
+        auto_now_add=True,
         verbose_name='Дата публикации'
     )
     author = models.ForeignKey(
