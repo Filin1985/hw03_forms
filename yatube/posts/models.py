@@ -8,7 +8,7 @@ User = get_user_model()
 class Group(models.Model):
     """Модель группы"""
     title = models.CharField('Имя группы', max_length=200)
-    slug = models.SlugField('Слаг', unique=True)
+    slug = models.SlugField('Идентификатор', unique=True)
     description = models.TextField('Описание группы', max_length=250)
 
     def __str__(self):
